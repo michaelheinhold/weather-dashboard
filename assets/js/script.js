@@ -6,15 +6,21 @@ var userSearch = document.querySelector('.search');
 
 $('#searchBtn').on('click', function(event) {
     event.preventDefault();
+    if(!userSearch.value){
+        alert('Please enter a valid city');
+        return;
+    }
     //get user input and search the city
     var searchedCity = userSearch.value.trim();
     console.log(searchedCity)
-
+    userSearch.value = ''
     //get city coords
     fetch (
         'https://api.openweathermap.org/data/2.5/weather?q='+searchedCity+'&appid='+apiKey
     )
     .then(function(response){
+        if(response.ok){
+        }
         response.json()
         .then(function(data){
             var lat = data.coord.lat
@@ -73,14 +79,48 @@ $('#searchBtn').on('click', function(event) {
 
                     //data for the 5 day forecast
                     var dailyForecast = data.daily
-
+                    console.log(dailyForecast);
+                    var forecastEl = document.querySelector('#forecast');
+                    //clears old cards
+                    forecastEl.innerHTML='';
+                    //sets date to +1
+                    var dateCounter = 1;
                     //for loop for 5 day forcast
                     for(var i =0; i< dailyForecast.length-3;i++){
-                        var forecastEl = document.querySelector('#forecast')
+                        //create each day
                         var dailyCard = document.createElement('div');
                         $(dailyCard).addClass('col bg-primary text-white ml-3 mb-3 rounded');
-                        dailyCard.textContent='hi bois';
-                        forecastEl.appendChild(dailyCard)
+                        //add each day
+                        var date = moment().add(dateCounter, 'days').format('MM/DD/YYYY');
+                        var dateEl = document.createElement('h4');
+                        dateEl.textContent=date;
+                        //increases counter by 1
+                        dateCounter++;
+                        dailyCard.appendChild(dateEl);
+
+                        //add weather icon
+                        var iconEl = document.createElement('img');
+                        var iconCode = dailyForecast[i].weather[0].icon
+                        iconEl.setAttribute('src', 'http://openweathermap.org/img/wn/'+iconCode+'@2x.png');
+                        dailyCard.appendChild(iconEl);
+
+                        //add temp
+                        var dailyTempEl = document.createElement('p');
+                        dailyTempEl.innerText='Temp: '+dailyForecast[i].temp.max+'°F';
+                        dailyCard.appendChild(dailyTempEl);
+
+                        //add wind
+                        var dailyWindEl = document.createElement('p');
+                        dailyWindEl.innerText = 'Wind: '+dailyForecast[i].wind_speed+'mph';
+                        dailyCard.appendChild(dailyWindEl);
+
+                        //add humidity
+                        var dailyHumidityEl = document.createElement('p');
+                        dailyHumidityEl.innerText = 'Humidity: '+dailyForecast[i].humidity+'%';
+                        dailyCard.appendChild(dailyHumidityEl);
+                        
+                        //add the whole card
+                        forecastEl.appendChild(dailyCard);
                     }
 
                 })
