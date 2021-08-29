@@ -9,23 +9,23 @@
     <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body>
-    <header class="header">
-        <h1 class="title">Weather Dashboard</h1>
-    </header>
+    <nav class="navbar navbar-dark bg-dark">
+        <span class="navbar-brand mb-0 h1 w-100 text-center">Weather Dashboard</span>
+    </nav>
 
     <main class='container'>
         <div class="row">
-            <div class="col-3">
+            <div class="col-4 bg-light">
                 <h2 class="search-title">Search for a City:</h2>
                 <form action="" class="search-form d-grid">
                     <input type="text" class="search">
                     <button type="submit" class="btn btn-primary btn-lg" id="searchBtn">Search</button>
                 </form>
             </div>
-            <div class="col-9 weather-info">
-                <div class="card row">
+            <div class="col-8 mb-3 weather-info">
+                <div class="card mb-3 row">
                     <div id="currentDisplay">
-                        <div class="city-name-title">
+                        <div class=" city-name-title">
                             <h2 class="city-name">City Name</h2><img id='weather-icon' src='' alt="">
                         </div>
                     </div>
@@ -33,7 +33,8 @@
                     </div>
     
                 </div>
-                <div class="row">
+                <div class="row">5 Day Forecast:</div>
+                <div class="row mt-3 gap-3" id="forecast">
     
                 </div>
             </div>

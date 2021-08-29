@@ -23,7 +23,7 @@ $('#searchBtn').on('click', function(event) {
             var currentDate = moment().format('MM/DD/YYYY')
             console.log(name)
             var cityName = document.querySelector('.city-name');
-            cityName.textContent= name + " " +currentDate;
+            cityName.textContent= name + " (" +currentDate+')';
 
             //using coords get weather info
             fetch (
@@ -32,6 +32,7 @@ $('#searchBtn').on('click', function(event) {
             .then(function(response){
                 response.json()
                 .then(function(data){
+                    console.log(data);
                     currentEl.innerHTML='';
 
                     //get current data
@@ -41,7 +42,7 @@ $('#searchBtn').on('click', function(event) {
                     var currentConditions = current.weather[0].icon;
                     var currentIcon = document.querySelector('#weather-icon');
                     currentIcon.removeAttribute('src');
-                    currentIcon.setAttribute('src', 'http://openweathermap.org/img/wn/'+currentConditions+'.png');
+                    currentIcon.setAttribute('src', 'http://openweathermap.org/img/wn/'+currentConditions+'@2x.png');
                     
                     //temp
                     var tempEl = document.createElement('p')
@@ -60,18 +61,27 @@ $('#searchBtn').on('click', function(event) {
                     
                     //uv index
                     var uvEl = document.createElement('p')
-                    uvEl.textContent='UV Index: '+current.uvi;
                     //check to see what category (for the color)
-                    if(uvEl >= 6){
-                        uvEl.setAttribute('class', 'high');
-                    }else if (uvEl < 6){
-                        uvEl.setAttribute('class', 'med');
-                    } else if(uvEl<3){
-                        uvEl.setAttribute('class', 'low');
+                    if(current.uvi >= 6){
+                        uvEl.innerHTML="UV Index: <span class='badge bg-danger'>"+current.uvi+"</span>";
+                    }else if (current.uvi >=3 &&current.uvi < 6){
+                        uvEl.innerHTML="UV Index: <span class='badge bg-warning'>"+current.uvi+"</span>";
+                    } else if(current.uvi<3){
+                        uvEl.innerHTML="UV Index: <span class='badge bg-success'>"+current.uvi+"</span>";
                     }
                     currentEl.appendChild(uvEl);
 
                     //data for the 5 day forecast
+                    var dailyForecast = data.daily
+
+                    //for loop for 5 day forcast
+                    for(var i =0; i< dailyForecast.length-3;i++){
+                        var forecastEl = document.querySelector('#forecast')
+                        var dailyCard = document.createElement('div');
+                        $(dailyCard).addClass('col bg-primary text-white ml-3 mb-3 rounded');
+                        dailyCard.textContent='hi bois';
+                        forecastEl.appendChild(dailyCard)
+                    }
 
                 })
             })

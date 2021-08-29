@@ -2,11 +2,9 @@
     margin: 0;
 }
 
-header {
-    text-align: center;
-    background-color: purple;
-    color: white;
+.h1 {
     padding: .8rem;
+    font-size: 3rem;
 }
 
 .search {
@@ -35,4 +33,8 @@ img{
     background-color: greenyellow;
     color: white;
     border-radius: .2rem;
+}
+
+.weather-info{
+    padding: 15px;
 }
