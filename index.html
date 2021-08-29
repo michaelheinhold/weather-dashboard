@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+    <header class="header">
+        <h1 class="title">Weather Dashboard</h1>
+    </header>
+
+    <main class='container'>
+        <div class="row">
+            <div class="col-3">
+                <h2 class="search-title">Search for a City:</h2>
+                <form action="" class="search-form d-grid">
+                    <input type="text" class="search">
+                    <button type="submit" class="btn btn-primary btn-lg" id="searchBtn">Search</button>
+                </form>
+            </div>
+            <div class="col-9 weather-info">
+                <div class="card row">
+                    <div id="currentDisplay">
+                        <div class="city-name-title">
+                            <h2 class="city-name">City Name</h2><img id='weather-icon' src='' alt="">
+                        </div>
+                    </div>
+                    <div class="current-info">
+                    </div>
+    
+                </div>
+                <div class="row">
+    
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>

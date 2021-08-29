@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+}
+
+header {
+    text-align: center;
+    background-color: purple;
+    color: white;
+    padding: .8rem;
+}
+
+.search {
+    border-radius: .4rem;
+    padding: .5rem;
+    margin-bottom: .8rem;
+}
+
+img{
+    display: inline;
+}
+
+.high{
+    background-color: red;
+    color: white;
+    border-radius: .2rem;
+}
+
+.med{
+    background-color:yellow;
+    color: white;
+    border-radius: .2rem;
+}
+
+.low{
+    background-color: greenyellow;
+    color: white;
+    border-radius: .2rem;
+}
