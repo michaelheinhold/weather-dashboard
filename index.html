@@ -16,11 +16,17 @@
     <main class='container'>
         <div class="row">
             <div class="col-4 bg-light">
-                <h2 class="search-title">Search for a City:</h2>
-                <form action="" class="search-form d-grid">
-                    <input type="text" class="search">
-                    <button type="submit" class="btn btn-primary btn-lg" id="searchBtn">Search</button>
-                </form>
+                <div class='row mb-3 border-bottom'>
+                    <h2 class="search-title">Search for a City:</h2>
+                    <form action="" class="search-form d-grid mb-3">
+                        <input type="text" class="search">
+                        <button type="submit" class="btn btn-primary btn-lg" id="searchBtn">Search</button>
+                    </form>
+                </div>
+                <div class="row history mt-1">
+                    <div class="row h3 mb-3">Search History:</div>
+                    <div class="row" id="history"></div>
+                </div>
             </div>
             <div class="col-8 mb-3 weather-info">
                 <div class="card mb-3 row">
