@@ -2,7 +2,8 @@ var apiKey = '5d237a397a92866c7385ac9fe8965ec9';
 var currentEl = document.querySelector('.current-info');
 var weatherInfo = document.querySelector('.weather-info');
 var userSearch = document.querySelector('.search');
-
+let searchHistory = JSON.parse(localStorage.getItem('search')) || [];
+var historyListEl = document.querySelector('#history');
 
 $('#searchBtn').on('click', function(event) {
     event.preventDefault();
@@ -10,12 +11,23 @@ $('#searchBtn').on('click', function(event) {
         alert('Please enter a valid city');
         return;
     }
+
+    //store search to history
+    var userSearchValue = userSearch.value
+    searchHistory.push(userSearchValue);
+    localStorage.setItem('search', JSON.stringify(searchHistory));
+    
+    
+
     //get user input and search the city
     var searchedCity = userSearch.value.trim();
-    console.log(searchedCity)
     userSearch.value = ''
+    getCityWeather(searchedCity);
+    setLocalStorage();
     //get city coords
-    fetch (
+});
+
+var getCityWeather = function(searchedCity) { fetch (
         'https://api.openweathermap.org/data/2.5/weather?q='+searchedCity+'&appid='+apiKey
     )
     .then(function(response){
@@ -27,7 +39,6 @@ $('#searchBtn').on('click', function(event) {
             var lon = data.coord.lon
             var name = data.name
             var currentDate = moment().format('MM/DD/YYYY')
-            console.log(name)
             var cityName = document.querySelector('.city-name');
             cityName.textContent= name + " (" +currentDate+')';
 
@@ -38,7 +49,6 @@ $('#searchBtn').on('click', function(event) {
             .then(function(response){
                 response.json()
                 .then(function(data){
-                    console.log(data);
                     currentEl.innerHTML='';
 
                     //get current data
@@ -79,7 +89,6 @@ $('#searchBtn').on('click', function(event) {
 
                     //data for the 5 day forecast
                     var dailyForecast = data.daily
-                    console.log(dailyForecast);
                     var forecastEl = document.querySelector('#forecast');
                     //clears old cards
                     forecastEl.innerHTML='';
@@ -126,6 +135,25 @@ $('#searchBtn').on('click', function(event) {
                 })
             })
         })
-    })
-})
+    })};
 
+
+
+var setLocalStorage = function() {
+    historyListEl.innerHTML=''
+    for (var i=0; i<searchHistory.length; i++) {
+        var historyItem = document.createElement("input");
+        // <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com"></input>
+        historyItem.setAttribute("type","text");
+        historyItem.setAttribute("readonly",true);
+        historyItem.setAttribute("class", "form-control history-item d-block bg-white mb-2");
+        historyItem.setAttribute("value", searchHistory[i]);
+        historyItem.addEventListener("click",function(event) {
+            getCityWeather(event.target.value);
+            })
+        historyListEl.append(historyItem);
+    }
+};
+
+
+setLocalStorage();
