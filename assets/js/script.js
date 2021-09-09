@@ -98,7 +98,7 @@ var getCityWeather = function(searchedCity) { fetch (
                     for(var i =0; i< dailyForecast.length-3;i++){
                         //create each day
                         var dailyCard = document.createElement('div');
-                        $(dailyCard).addClass('col bg-primary text-white ml-3 mb-3 rounded');
+                        $(dailyCard).addClass('col-lg bg-primary text-white ml-3 mb-3 rounded forecast-day');
                         //add each day
                         var date = moment().add(dateCounter, 'days').format('MM/DD/YYYY');
                         var dateEl = document.createElement('h4');
